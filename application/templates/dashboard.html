@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Dashboard</h1>
+{% if message %}
+<p class="text-purple-500 mb-4">{{ message }}</p>
+{% endif %}
+
+<div class="mb-4">
+  <label class="inline-flex items-center">
+    <input type="checkbox" id="filterCheckbox" class="form-checkbox h-5 w-5 text-purple-600">
+    <span class="ml-2 text-gray-700">Also show finished media</span>
+  </label>
+</div>
+
+  <table class="w-full border-collapse">
+    <thead>
+      <tr class="bg-gray-900 text-white">
+        <th class="py-2 px-4 text-left">Name</th>
+        <th class="py-2 px-4 text-left">State</th>
+        <th class="py-2 px-4 text-left">Progress</th>
+        <th class="py-2 px-4 text-left">Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for entry in state_data %}
+        {% if entry[3] == "movies" or entry[3] == "tvshows" %}
+        <tr class="{{ loop.cycle('bg-gray-100', 'bg-white') }}">
+          <td class="py-2 px-4" title="{{ entry[0] }}">{{ entry[0][:40] }}{% if entry[0]|length > 40 %}...{% endif %}</td>
+          <td class="py-2 px-4">{{ entry[1] }}</td>
+          <td class="py-2 px-4">{{ entry[2] }}</td>
+          <td class="py-2 px-4">{{ entry[3] }}</td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <script>
+    const filterCheckbox = document.getElementById("filterCheckbox");
+    let show_copied_only = false;
+  
+    filterCheckbox.addEventListener("change", function() {
+      show_copied_only = this.checked;
+      refreshTable();
+    });
+  
+    function refreshTable() {
+      const tableRows = document.querySelectorAll("tbody tr");
+      tableRows.forEach((row) => {
+        const stateCell = row.querySelector(".py-2.px-4:nth-child(2)");
+        if (stateCell.textContent.trim() === "copied") {
+          row.style.display = show_copied_only ? "table-row" : "none";
+        } else {
+          row.style.display = "table-row";
+        }
+      });
+    }
+  
+    // Call refreshTable initially to apply any existing checkbox state on page load.
+    refreshTable();
+  </script>
+
+{% endblock %}

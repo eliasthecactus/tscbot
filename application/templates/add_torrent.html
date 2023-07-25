@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="text-2xl font-bold mb-4">Add Torrent</h1>
+    <form action="{{ url_for('add_torrent') }}" method="POST">
+        <div class="flex flex-col mb-4">
+            <label for="url" class="mb-2">URL</label>
+            <input type="text" id="url" name="url" class="border border-gray-300 rounded px-3 py-2" placeholder="Enter URL">
+        </div>
+        <div class="flex flex-col mb-4">
+            <label for="category" class="mb-2">Category</label>
+            <select id="category" name="category" class="border border-gray-300 rounded px-3 py-2">
+                <option value="movies">Movie</option>
+                <option value="tvshows">TV Show</option>
+                <option value="others">Other</option>
+            </select>
+        </div>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Torrent</button>
+    </form>
+{% endblock %}

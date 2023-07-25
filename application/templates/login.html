@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="max-w-md mx-auto">
+        <h2 class="text-2xl font-bold mb-4">Login</h2>
+        {% if error %}
+            <p class="text-red-500 mb-4">{{ error }}</p>
+        {% endif %}
+        <form action="{{ url_for('login') }}" method="POST">
+            <div class="mb-4">
+                <label for="username" class="block">Username</label>
+                <input type="text" id="username" name="username" class="border border-gray-300 rounded px-3 py-2 w-full" autofocus>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block">Password</label>
+                <input type="password" id="password" name="password" class="border border-gray-300 rounded px-3 py-2 w-full">
+            </div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Login</button>
+        </form>
+    </div>
+{% endblock %}

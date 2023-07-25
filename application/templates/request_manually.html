@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Request Manually</h1>
+
+<form action="{{ url_for('request_manually') }}" method="POST" class="mb-4">
+    <input type="text" name="imdb" class="border border-gray-300 rounded px-3 py-2 w-full" placeholder="IMDb URL" required>
+    <input type="text" name="title" class="border border-gray-300 rounded px-3 py-2 w-full" placeholder="Title of Request (eg. Family Guy S01-S03)" required>
+    <textarea type="text" name="description" class="border border-gray-300 rounded px-3 py-2 w-full" placeholder="Description"></textarea required>
+
+    <select name="type" class="border border-gray-300 rounded px-3 py-2">
+        <option value="movie">Movie</option>
+        <option value="tvshow-episode">Episode</option>
+        <option value="tvshow-season">Staffel/Serie</option>
+    </select>
+    <select name="quality" class="border border-gray-300 rounded px-3 py-2">
+        <option value="1080">1080p</option>
+        <option value="720">720p</option>
+    </select>
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Request</button>
+</form>
+
+{% endblock %}

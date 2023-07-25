@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>affezoo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-oQld2B1pd3/5PhzZvzJkwNB4q4rBCqYzpJ6V7G6HEgw=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .content {
+            flex: 1;
+        }
+    </style>
+    
+
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="bg-gray-900 text-white py-4">
+            <div class="container mx-auto flex justify-between items-center px-4">
+                <a href="{{ url_for('home') }}" class="font-bold text-xl">affezoo</a>
+                <ul class="flex space-x-4">
+                    <li><a href="{{ url_for('home') }}" class="text-white hover:text-gray-300" title="Dashbaord"><i class="fa-solid fa-gauge"></i></a></li>
+                    <li><a href="{{ url_for('search') }}" class="text-white hover:text-gray-300" title="search TSC"><i class="fas fa-search"></i></a></li>
+                    <li><a href="{{ url_for('organize') }}" class="text-white hover:text-gray-300" title="Reorganize"><i class="fa-solid fa-rotate"></i></a></li>
+                    <li><a href="{{ url_for('account') }}" class="text-white hover:text-gray-300" title="User Dashboard"><i class="fa-solid fa-user"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container mx-auto px-4 py-8 content">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <footer class="bg-gray-200 text-gray-600 py-4 text-center">
+            <p>&copy; 2023 affezoo by sam</p>
+        </footer>
+    </div>
+</body>
+</html>

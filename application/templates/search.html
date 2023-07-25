@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="text-2xl font-bold mb-4">Search</h1>
+    <form action="{{ url_for('search') }}" method="POST" class="mb-4">
+        <input type="text" name="query" class="border border-gray-300 rounded px-3 py-2 w-full" placeholder="Search..." value="{{ query }}" autofocus>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Search</button>
+    </form>
+    <a href="requesttorrent" class="bg-green-500 text-white px-4 py-2 rounded">Request</a>
+    <a href="add_torrent" class="bg-green-500 text-white px-4 py-2 rounded">Add manually</a>
+
+    {% if search_results %}
+    <table class="w-full border-collapse">
+        <thead>
+        <tr class="bg-gray-900 text-white">
+            <th class="py-2 px-4 text-left">Cover</th>
+            <th class="py-2 px-4 text-left">Name</th>
+            <th class="py-2 px-4 text-left">Quality</th>
+            <th class="py-2 px-4 text-left">Size</th>
+            <th class="py-2 px-4 text-left">S</th>
+            <th class="py-2 px-4 text-left">Download</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for result in search_results %}
+            <tr class="{{ loop.cycle('bg-gray-100', 'bg-white') }}">
+            <td class="py-2 px-4"><img src="{{ result.image_url }}" alt="Torrent Image"style="width: 50px; height: 75px; object-fit: cover;"></td>
+            <td class="py-2 px-4">
+                <div class="font-bold" title="{{ result.title }}">{{ result.easy_title[:30] }}{% if result.easy_title|length > 30 %}...{% endif %}</div>
+                <div class="text-xs text-gray-500">{{ result.title[:50] }}{% if result.title|length > 50 %}...{% endif %}</div>
+            </td>
+            <td class="py-2 px-4">{{ result.quality }}</td>
+            <td class="py-2 px-4">{{ result.size }} {{ result.size_format }}</td>
+            <td class="py-2 px-4">{{ result.seeder }}</td>
+            <td class="py-2 px-4">
+                {% if result.seeder > 0 %}
+                <form action="{{ url_for('add_auto_torrent') }}" method="POST">
+                    <input type="hidden" name="id" value="{{ result.id }}">
+                    <input type="hidden" name="category" value="{{ result.category }}">
+                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Download</button>
+                </form>
+            {% else %}
+                <form action="{{ url_for('add_auto_torrent') }}" method="POST">
+                    <input type="hidden" name="id" value="{{ result.id }}">
+                    <input type="hidden" name="category" value="{{ result.category }}">
+                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Download</button>
+                </form>
+            {% endif %}
+            </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No search results found.</p>
+    {% endif %}
+
+{% endblock %}

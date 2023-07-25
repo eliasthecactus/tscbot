@@ -1,0 +1,7 @@
+Flask
+qbittorrent
+patool
+requests
+beautifulsoup4
+tabulate
+python-telegram-bot

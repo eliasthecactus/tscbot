@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Request</h1>
+<form action="{{ url_for('requesttorrent') }}" method="POST" class="mb-4">
+    <input type="text" name="query" class="border border-gray-300 rounded px-3 py-2 w-full" placeholder="Search..." autofocus>
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Search</button>
+</form>
+<a href="request_manually" class="bg-green-500 text-white px-4 py-2 rounded">Request Manually</a>
+
+{% if search_results %}
+    <table class="w-full border-collapse">
+        <thead>
+            <tr class="bg-gray-900 text-white">
+                <th class="py-2 px-4 text-left">Name</th>
+                <th class="py-2 px-4 text-left">Quality</th>
+                <th class="py-2 px-4 text-left">Size</th>
+                <th class="py-2 px-4 text-left">Uploader</th>
+                <th class="py-2 px-4 text-left">Type</th>
+                <th class="py-2 px-4 text-left">Request</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in search_results %}
+            <tr class="{{ loop.cycle('bg-gray-100', 'bg-white') }}">
+                <td class="py-2 px-4 text-left"><a href="{{ result.url }}" target="_blank" title="{{ result.release_name }}">{{ result.title }}</a></td>
+                <td class="py-2 px-4 text-left">{{ result.quality }}</td>
+                <td class="py-2 px-4 text-left">{{ result.size }}</td>
+                <td class="py-2 px-4 text-left">{{ result.group }}</td>
+                <td class="py-2 px-4 text-left">{{ result.objecttype }}</td>
+                <td>
+                    <form action="{{ url_for('auto_requesttorrent') }}" method="POST">
+                        <input type="hidden" name="title" value="{{ result.title }}">
+                        <input type="hidden" name="url" value="{{ result.url }}">
+                        <input type="hidden" name="description" value="oder aehnlich">
+                        <input type="hidden" name="objecttype" value="{{ result.objecttype }}">
+                        <input type="hidden" name="quality" value="{{ result.quality }}">
+                        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Request</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+<p>No search results found.</p>
+{% endif %}
+{% endblock %}
