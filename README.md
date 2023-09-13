@@ -65,16 +65,10 @@ python app.py
 
 ## 📃 ToDo
 - [x] Add Emby-Auth
-- [x] Add xrel integration
-- [ ] TV Show support
-- [ ] Request state overview
-
-
-## Team
-<div style="display: flex; flex-direction: row; align-items: center;">
-<img src="https://avatars.githubusercontent.com/u/14819853?v=3&s=30" alt="eliasthecacuts" style="width: 30px; height: 30px;">
-<strong>elias - [Instagram](https://instagram.com/eliasthecactus)</strong>
-</div>
+- [x] Add xrel requests
+- [ ] Integrate Custom Auth
+- [ ] TV Show support (with extracting, copying...)
+- [ ] "My Requests" Overview
 
 
 ## 🤝 Contributing
