@@ -13,5 +13,8 @@ qbit_url = "http://127.0.0.1:8080/"
 qbit_user = "admin"
 qbit_pass = "adminadmin"
 
+emby_api_key = "your_emby_api_key"
+emby_url = "http://127.0.0.1:8096"
+
 # you can take one from here: https://randomkeygen.com/
 app_secret_key = "get_a_secret_key"
