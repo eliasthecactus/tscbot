@@ -30,8 +30,11 @@
 
 
 ## Features
-- bla bla
-- bla bla
+- Search the library
+- Download media
+- Auto-import the downloaded media to your media folders
+- Auth trough Emby
+- ...
 
 ## Requirements
 - Enable the `wget-Kommando` in your TSC-Account-Settings
